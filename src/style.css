@@ -3,11 +3,15 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Karla', sans-serif;
 }
 
 body {
     margin: 0;
+    font-family: 'Karla', sans-serif;
+}
+
+main {
+    padding: 36px;
 }
 
 /* navigation */
@@ -22,7 +26,7 @@ nav {
 }
 
 nav .logo a, nav p {
-    color: #FFF;
+    color: #FFFFFF;
 }
 
 nav .logo a {
@@ -44,3 +48,25 @@ nav p {
 }
 
 /* form */
+
+.meme-form {
+    display: grid;
+    grid-template: 40px 40px / 1fr 1fr;
+    gap: 17px;
+}
+
+.form--input {
+    font-family: 'Karla', sans-serif;
+    border: 1px solid #D5D4D8;
+    border-radius: 5px;
+    text-indent: 5px;
+}
+
+.form--btn {
+    grid-column: 1 / -1;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
+    color: #FFFFFF;
+    cursor: pointer;
+}
