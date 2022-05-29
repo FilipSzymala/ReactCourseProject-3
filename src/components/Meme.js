@@ -21,26 +21,46 @@ export default function Meme() {
             imageSrc: url
         }))
     }
+
+    const handleChange = (event) => {
+        setMeme(prevMeme => {
+            const { name, value } = event.target
+            return {
+                ...prevMeme,
+                [name]: value
+            }
+        })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()   
+    }
     
     return (
         <main>
-            <form className="meme-form">
+            <form className="meme-form" onSubmit={handleSubmit}>
                 <input 
                     type="text"
                     placeholder="top text"
                     className="form--input" 
+                    name="topText"
+                    value={meme.topText}
+                    onChange={handleChange}
                 />
                 <input 
                     type="text"
                     placeholder="bottom text"
-                    className="form--input" 
+                    className="form--input"
+                    name="bottomText" 
+                    value={meme.bottomText}
+                    onChange={handleChange} 
                  />
                 <button className="form--btn" onClick={getMemeImage}>Get a new meme image 🖼</button>
             </form>
             <div className="meme">
                 <img src={meme.imageSrc} className="meme--image" />
-                <h2 className="meme--text top">One does not simply</h2>
-                <h2 className="meme--text bottom">Walk into Mordor</h2>
+                <h2 className="meme--text top">{meme.topText}</h2>
+                <h2 className="meme--text bottom">{meme.bottomText}</h2>
             </div>
         </main>
     )
