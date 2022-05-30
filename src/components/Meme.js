@@ -1,5 +1,4 @@
 import React from "react"
-import memesData from "../memesData"
 
 export default function Meme() {
     
@@ -9,11 +8,17 @@ export default function Meme() {
         imageSrc: "http://i.imgflip.com/1bij.jpg"
     })
 
-    const [allMemeImages, setAllMemeImages] = React.useState(memesData)
+    const [allMemes, setAllMemes] = React.useState([])
+
+    React.useEffect(() => {
+        fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then(res => setAllMemes(res.data.memes))
+    })
 
     const getMemeImage = (event) => {
         event.preventDefault();
-        const memeArr = memesData.data.memes
+        const memeArr = allMemes
         const ranNum = Math.floor(Math.random()*memeArr.length)
         const url = memeArr[ranNum].url
         setMeme(prevMeme => ({
@@ -23,8 +28,8 @@ export default function Meme() {
     }
 
     const handleChange = (event) => {
+        const { name, value } = event.target
         setMeme(prevMeme => {
-            const { name, value } = event.target
             return {
                 ...prevMeme,
                 [name]: value
@@ -58,7 +63,7 @@ export default function Meme() {
                 <button className="form--btn" onClick={getMemeImage}>Get a new meme image 🖼</button>
             </form>
             <div className="meme">
-                <img src={meme.imageSrc} className="meme--image" />
+                <img src={meme.imageSrc} className="meme--image" alt="meme" />
                 <h2 className="meme--text top">{meme.topText}</h2>
                 <h2 className="meme--text bottom">{meme.bottomText}</h2>
             </div>
